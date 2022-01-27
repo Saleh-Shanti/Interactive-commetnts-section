@@ -24,6 +24,7 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="./styles/style.css" />
+    <!-- <link rel="stylesheet" href="./styles/media-queries.css" /> -->
     <title>SALEH SHANTI | Interactive comments section</title>
   </head>
   <body>
@@ -41,7 +42,7 @@
               <span class="derution">1 Month ago</span>
             </div>
 
-            <div class="reply">
+            <div class="reply desktop">
               <i class="fas fa-reply"></i>
               <button class="reply-btn">Reply</button>
             </div>
@@ -52,80 +53,103 @@
             iure excepturi?
           </div>
         </div>
-        <div class="vote">
-          <span class="vote-span sign plus">+</span>
-          <span class="vote-span num">20</span>
-          <span class="vote-span sign minus">-</span>
+
+        <div class="mobile-vote-reply">
+          <div class="vote">
+            <span class="vote-span sign plus">+</span>
+            <span class="vote-span num">20</span>
+            <span class="vote-span sign minus">-</span>
+          </div>
+          <div class="reply mobile">
+            <i class="fas fa-reply"></i>
+            <button class="reply-btn">Reply</button>
+          </div>
         </div>
       </div>
+      <div class="replied">
+        <div class="comment">
+          <div class="comment-info">
+            <div class="head">
+              <div class="main-desc">
+                <img
+                  src="./images/avatars/image-maxblagun.webp"
+                  alt=""
+                  class="avatar"
+                />
+                <span class="title">Ali Ramez</span>
+                <span class="derution">2 Month ago</span>
+              </div>
 
-      <div class="comment replied">
-        <div class="comment-info">
-          <div class="head">
-            <div class="main-desc">
-              <img
-                src="./images/avatars/image-maxblagun.webp"
-                alt=""
-                class="avatar"
-              />
-              <span class="title">Ali Ramez</span>
-              <span class="derution">2 Month ago</span>
+              <div class="reply desktop">
+                <i class="fas fa-reply"></i>
+                <button class="reply-btn">Reply</button>
+              </div>
             </div>
+            <div class="comment-desc">
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente
+              rem saepe deserunt perspiciatis voluptas quis minus corporis
+              facere iure excepturi?
+            </div>
+          </div>
 
-            <div class="reply">
+          <div class="mobile-vote-reply">
+            <div class="vote">
+              <span class="vote-span sign plus">+</span>
+              <span class="vote-span num">20</span>
+              <span class="vote-span sign minus">-</span>
+            </div>
+            <div class="reply mobile">
               <i class="fas fa-reply"></i>
               <button class="reply-btn">Reply</button>
             </div>
           </div>
-          <div class="comment-desc">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente
-            rem saepe deserunt perspiciatis
+        </div>
+
+        <div class="comment">
+          <div class="comment-info">
+            <div class="head">
+              <div class="main-desc">
+                <img
+                  src="./images/avatars/image-juliusomo.webp"
+                  alt=""
+                  class="avatar"
+                />
+                <span class="title">Ahmad karam</span>
+                <span class="you">you</span>
+                <span class="derution">1 day ago</span>
+              </div>
+              <div class="delete desktop">
+                <i class="fas fa-trash-alt delete"></i>
+                <span>Delete</span>
+              </div>
+
+              <div class="reply desktop">
+                <i class="fas fa-pen"></i>
+                <button class="reply-btn edit">Edit</button>
+              </div>
+            </div>
+            <div class="comment-desc">
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Lorem
+              ipsum dolor sit amet, consectetur adipisicing elit. Dolorem sequi
+              porro aspernatur culpa sunt reprehenderit debitis vel, soluta
+              explicabo iste.
+            </div>
           </div>
-        </div>
-        <div class="vote">
-          <span class="vote-span sign plus">+</span>
-          <span class="vote-span num">10</span>
-          <span class="vote-span sign minus">-</span>
-        </div>
-      </div>
-
-      <div class="comment replied">
-        <div class="comment-info">
-          <div class="head">
-            <div class="main-desc">
-              <img
-                src="./images/avatars/image-juliusomo.webp"
-                alt=""
-                class="avatar"
-              />
-              <span class="title">Ahmad karam</span>
-              <span class="you">you</span>
-              <span class="derution">1 day ago</span>
+          <div class="mobile-vote-reply">
+            <div class="vote">
+              <span class="vote-span sign plus">+</span>
+              <span class="vote-span num">20</span>
+              <span class="vote-span sign minus">-</span>
             </div>
-            <div class="delete">
+            <div class="reply mobile">
               <i class="fas fa-trash-alt delete"></i>
-              <span>Delete</span>
-            </div>
-
-            <div class="reply">
+              <span class="delete">Delete</span>
               <i class="fas fa-pen"></i>
               <button class="reply-btn edit">Edit</button>
             </div>
           </div>
-          <div class="comment-desc">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Lorem
-            ipsum dolor sit amet, consectetur adipisicing elit. Dolorem sequi
-            porro aspernatur culpa sunt reprehenderit debitis vel, soluta
-            explicabo iste.
-          </div>
-        </div>
-        <div class="vote">
-          <span class="vote-span sign plus">+</span>
-          <span class="vote-span num">0</span>
-          <span class="vote-span sign minus">-</span>
         </div>
       </div>
-
       <div class="comment">
         <div class="comment-info">
           <div class="head">
@@ -139,12 +163,12 @@
               <span class="you">you</span>
               <span class="derution">1 day ago</span>
             </div>
-            <div class="delete">
+            <div class="delete desktop">
               <i class="fas fa-trash-alt delete"></i>
               <span>Delete</span>
             </div>
 
-            <div class="reply">
+            <div class="reply desktop">
               <i class="fas fa-pen"></i>
               <button class="reply-btn edit">Edit</button>
             </div>
@@ -156,10 +180,18 @@
             explicabo iste.
           </div>
         </div>
-        <div class="vote">
-          <span class="vote-span sign plus">+</span>
-          <span class="vote-span num">0</span>
-          <span class="vote-span sign minus">-</span>
+        <div class="mobile-vote-reply">
+          <div class="vote">
+            <span class="vote-span sign plus">+</span>
+            <span class="vote-span num">20</span>
+            <span class="vote-span sign minus">-</span>
+          </div>
+          <div class="reply mobile">
+            <i class="fas fa-trash-alt delete"></i>
+            <span class="delete">Delete</span>
+            <i class="fas fa-pen"></i>
+            <button class="reply-btn edit">Edit</button>
+          </div>
         </div>
       </div>
 

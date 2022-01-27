@@ -1,3 +1,4 @@
+/*  General Rules */
 :root {
   --Moderate_blue: hsl(238, 40%, 52%);
   --Soft_Red: hsl(358, 79%, 66%);
@@ -30,10 +31,19 @@ body {
   font-family: var(--roboto);
 }
 
+a {
+  text-decoration: none;
+  color: var(--Moderate_blue);
+}
+/*  End General Rules */
+
+/* Styling main contents */
 .container {
   width: 50%;
   margin: auto 25%;
 }
+
+/* Comment card */
 .comment {
   background-color: var(--White);
   margin: 10px;
@@ -43,6 +53,8 @@ body {
   flex-direction: row-reverse;
   justify-content: space-between;
 }
+
+/* Comment info that include the body of comment except the vote bar */
 .comment-info {
   padding: 10px;
   color: var(--Grayish_Blue);
@@ -70,19 +82,7 @@ body {
   font-weight: 700;
   color: black;
 }
-.reply {
-  color: var(--Moderate_blue);
-  cursor: pointer;
-}
-.reply-btn {
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  font-family: var(--roboto);
-  font-weight: 700;
-  font-size: 1.1rem;
-  color: var(--Moderate_blue);
-}
+
 .comment-desc {
   padding: 5px;
 }
@@ -118,16 +118,27 @@ body {
   color: var(--Moderate_blue);
 }
 
-.replied {
-  margin-left: 10%;
+.reply {
+  color: var(--Moderate_blue);
+  cursor: pointer;
+}
+.reply-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-family: var(--roboto);
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--Moderate_blue);
 }
 
-.replied::after {
-  content: "";
-  border: 1px solid var(--Dark_blue);
-  left: -60px;
-  position: relative;
+/* Replied comments section */
+.replied {
+  padding-left: 6%;
+  margin-left: 5%;
+  border-left: 1px solid var(--Grayish_Blue);
 }
+
 .you {
   background-color: var(--Moderate_blue);
   color: var(--White);
@@ -138,7 +149,11 @@ body {
   color: var(--Soft_Red);
   cursor: pointer;
 }
+.mobile {
+  display: none;
+}
 
+/* add comment card */
 .add_comment {
   background-color: var(--White);
   margin: 10px;
@@ -169,4 +184,47 @@ body {
   flex: 3;
   border-radius: 10px;
   border: 1px solid var(--Light_grayish_blue);
+}
+/* Media Queries for smaller screens */
+@media screen and (max-width: 1284px) {
+  .container {
+    width: 70%;
+    margin: auto 15%;
+  }
+}
+
+@media screen and (max-width: 897px) {
+  .container {
+    width: 80%;
+    margin: auto 10%;
+  }
+}
+@media screen and (max-width: 689px) {
+  .comment {
+    flex-direction: column;
+  }
+
+  .container {
+    width: 100%;
+    margin: auto;
+  }
+
+  .desktop {
+    display: none;
+  }
+  .mobile {
+    display: block;
+  }
+  .mobile-vote-reply {
+    display: flex;
+    justify-content: space-between;
+  }
+  .vote {
+    flex-direction: row;
+    justify-content: space-between;
+    width: fit-content;
+  }
+  .delete {
+    margin-right: 10px;
+  }
 }
