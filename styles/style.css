@@ -16,7 +16,7 @@
 }
 
 .attribution {
-  font-size: 11px;
+  font-size: 15px;
   text-align: center;
 }
 .attribution a {
@@ -40,7 +40,13 @@ a {
 /* Styling main contents */
 .container {
   width: 50%;
-  margin: auto 25%;
+  margin: 1% 25% 5%;
+  padding: 5px;
+  background: transparent;
+  border-radius: 10px;
+  /* box-shadow: 7px 25px 33px 0px rgba(0, 0, 0, 0.45);
+  -webkit-box-shadow: 7px 25px 33px 0px rgba(0, 0, 0, 0.45);
+  -moz-box-shadow: 7px 25px 33px 0px rgba(0, 0, 0, 0.45); */
 }
 
 /* Comment card */
@@ -52,6 +58,7 @@ a {
   display: flex;
   flex-direction: row-reverse;
   justify-content: space-between;
+  align-items: center;
 }
 
 /* Comment info that include the body of comment except the vote bar */
@@ -137,6 +144,7 @@ a {
   padding-left: 6%;
   margin-left: 5%;
   border-left: 1px solid var(--Grayish_Blue);
+  background: var(--Light_gray);
 }
 
 .you {
@@ -153,7 +161,7 @@ a {
   display: none;
 }
 
-/* add comment card */
+/* add comment  card*/
 .add_comment {
   background-color: var(--White);
   margin: 10px;
@@ -200,8 +208,15 @@ a {
   }
 }
 @media screen and (max-width: 689px) {
+  * {
+    font-size: 0.9rem;
+  }
+  .container {
+    box-shadow: none;
+  }
   .comment {
     flex-direction: column;
+    align-items: stretch;
   }
 
   .container {
