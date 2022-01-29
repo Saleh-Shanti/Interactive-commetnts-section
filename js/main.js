@@ -4,19 +4,19 @@ let container=document.querySelector(".container");
 let currentUser;
 const addComment=(data)=>
 {
-
+    let ParentContainer=container;
     currentUser=data.currentUser.username
 
     for (let index = 0; index < data.comments.length; index++) 
     {
         if(data.comments[index].user.username==currentUser)
         {
-            createElements(data.comments[index]);
+            createElements(data.comments[index],ParentContainer);
             //createCurrentUserComment(data.comments[index]);
         }
         else
         {
-            createElements(data.comments[index]);
+            createElements(data.comments[index],ParentContainer);
         }
     }
 
@@ -28,11 +28,13 @@ const createReply=()=>
 {
     let replies=document.createElement('div');
     replies.classList.add("replied")
+
+
     return replies;
 }
 
  //const createComment=()=>{}
- const createElements=(data)=>{
+ const createElements=(data,ParentContainer)=>{
 
     let comment=document.createElement('div');
     let commentInfo=document.createElement('div');
@@ -72,16 +74,24 @@ const createReply=()=>
     // Appending childs to parents
     mainDesc.appendChild(avatar);
     mainDesc.appendChild(title);
-    
-   
-
-
     mainDesc.appendChild(derution);
     head.appendChild(mainDesc);
     reply.innerHTML='<i class="fas fa-reply"></i>';
     replyBtn.innerText="Reply";
     ReplyMobile.innerHTML='<i class="fas fa-reply"></i><button class="reply-btn">Reply</button>';
+    reply.appendChild(replyBtn);
+    head.appendChild(reply);
+    commentInfo.appendChild(head);
+    commentInfo.appendChild(commentDesc);
+    comment.appendChild(commentInfo);
+    vote.appendChild(votePlus);
+    vote.appendChild(voteNum);
+    vote.appendChild(voteMinus);
+    mobVoteReply.appendChild(vote);
+    mobVoteReply.appendChild(ReplyMobile);
+    comment.appendChild(mobVoteReply);
 
+// Checking if the user was the Current user
     if(data.user.username==currentUser)
     {
         let you=document.createElement('span');
@@ -92,7 +102,6 @@ const createReply=()=>
         delet.innerHTML='<i class="fas fa-trash-alt delete"></i>&nbsp;<span>Delete</span>'
         mainDesc.appendChild(you)
         head.appendChild(delet)
-
         reply.innerHTML='<i class="fas fa-edit"></i>';
         replyBtn.innerText="Edit";
         ReplyMobile.innerHTML=`  <i class="fas fa-trash-alt delete"></i>
@@ -100,54 +109,46 @@ const createReply=()=>
         <i class="fas fa-pen"></i>
         <button class="reply-btn edit">Edit</button>`;
         
-
-
     }
  
-    reply.appendChild(replyBtn);
-    head.appendChild(reply);
-    commentInfo.appendChild(head);
-
-    commentInfo.appendChild(commentDesc);
-    comment.appendChild(commentInfo);
-    vote.appendChild(votePlus);
-    vote.appendChild(voteNum);
-    vote.appendChild(voteMinus);
-    
-    mobVoteReply.appendChild(vote);
-    mobVoteReply.appendChild(ReplyMobile);
-    comment.appendChild(mobVoteReply);
-
 
     // adding content
     avatar.src=data.user.image.webp;
     title.innerText=data.user.username;
     derution.innerText=data.createdAt;
-
     commentDesc.innerText=data.content;
     votePlus.innerText="+";
     voteNum.innerText=data.score;
     voteMinus.innerText="-";
+    ParentContainer.appendChild(comment); 
 
     // Checking for replies
     
-
-    if (  data.replies != undefined ) 
+    if (  data.replies === undefined || data.replies.length===0 ) 
     {
-        for (let index = 0; index < data.replies.length; index++) 
-        {   
-         
-            createElements(data.replies[index])
-        }
+       
+        ParentContainer.appendChild(comment); 
+              
         
+    }else{
+
+    let replies=createReply();
+    for (let index = 0; index < data.replies.length; index++) 
+    {   
         
+        createElements(data.replies[index],replies)
+        ParentContainer.appendChild(replies); 
+        //container.appendChild(createReply());
     }
-
-
-    // Append it to the container
     
-    container.appendChild(comment);
-    container.appendChild(createReply());
+
+    }
+    
+    
+    
+    // Append it to the container
+  
+    
 }
 
 
@@ -171,7 +172,7 @@ const createReply=()=>
   
   // trigger async function
   fetchAsync()
-      .then(data => addComment(data) )
+      .then(data => addComment(data,container) )
       
 
 
