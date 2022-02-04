@@ -1,41 +1,57 @@
-
 let container=document.querySelector(".container");
-
+let modal=document.querySelector(".modal");
 let currentUser;
-const addComment=(data)=>
-{
-    let ParentContainer=container;
-    currentUser=data.currentUser.username
 
-    for (let index = 0; index < data.comments.length; index++) 
-    {
-        if(data.comments[index].user.username==currentUser)
-        {
-            createElements(data.comments[index],ParentContainer);
-            //createCurrentUserComment(data.comments[index]);
-        }
-        else
-        {
-            createElements(data.comments[index],ParentContainer);
-        }
+// Helper Functions
+
+// Disable Scroll function
+const functiondisable=()=> {
+    // To get the scroll position of current webpage
+    let TopScroll = window.pageYOffset || document.documentElement.scrollTop;
+    let LeftScroll = window.pageXOffset || document.documentElement.scrollLeft;
+    
+    // if scroll happens, set it to the previous value
+    window.onscroll = function() {
+    window.scrollTo(LeftScroll, TopScroll);
+            };
     }
 
-
+// Enable Scroll function
+const  functionenable=()=> 
+{
+    window.onscroll = function() {};
 }
 
 
+// 1.Create Add a Comment section 
+const addComment=()=>{
+    let addCommenSection=document.createElement('div');
+    addCommenSection.innerHTML=`<div class="add_comment">
+    <img src="./images/avatars/image-juliusomo.webp" alt="" class="avatar" />
+    <input
+      type="text"
+      name="add-comment"
+      id="add"
+      placeholder="Your Comment ...."
+    />
+    <button value="Submit" class="add-comment-btn">Send</button>
+  </div>`;
+  container.appendChild(addCommenSection);
+}
+
+
+// 2. Creating Reply Div to append the replies comments to
 const createReply=()=>
 {
     let replies=document.createElement('div');
     replies.classList.add("replied")
-
-
     return replies;
 }
 
- //const createComment=()=>{}
+// 3. Creating the Comment Divs with Contents function and Appendin it to the Parent container
  const createElements=(data,ParentContainer)=>{
 
+    // Declaring the Divs elements
     let comment=document.createElement('div');
     let commentInfo=document.createElement('div');
     let head=document.createElement('div');
@@ -99,13 +115,14 @@ const createReply=()=>
         you.classList.add('you');
         delet.classList.add('delete','desktop');
         you.innerText='you';
-        delet.innerHTML='<i class="fas fa-trash-alt delete"></i>&nbsp;<span>Delete</span>'
+        delet.innerHTML='<i class="fas fa-trash-alt delete"></i>&nbsp;<span class="deletBtn">Delete</span>'
         mainDesc.appendChild(you)
         head.appendChild(delet)
-        reply.innerHTML='<i class="fas fa-edit"></i>';
+        reply.innerHTML=`<i class="fas fa-pen"></i>
+        <button class="reply-btn edit">Edit</button>`;
         replyBtn.innerText="Edit";
-        ReplyMobile.innerHTML=`  <i class="fas fa-trash-alt delete"></i>
-        <span class="delete">Delete</span>
+        ReplyMobile.innerHTML=`  <span><i class="fas fa-trash-alt delete"></i>
+        <span class="deletBtn">Delete</span></span>
         <i class="fas fa-pen"></i>
         <button class="reply-btn edit">Edit</button>`;
         
@@ -116,7 +133,7 @@ const createReply=()=>
     avatar.src=data.user.image.webp;
     title.innerText=data.user.username;
     derution.innerText=data.createdAt;
-    commentDesc.innerText=data.content;
+    commentDesc.innerHTML=`<span class="usernamereply">@${data.user.username}</span>${data.content}`
     votePlus.innerText="+";
     voteNum.innerText=data.score;
     voteMinus.innerText="-";
@@ -128,28 +145,67 @@ const createReply=()=>
     {
        
         ParentContainer.appendChild(comment); 
-              
-        
-    }else{
-
-    let replies=createReply();
-    for (let index = 0; index < data.replies.length; index++) 
-    {   
-        
-        createElements(data.replies[index],replies)
-        ParentContainer.appendChild(replies); 
-        //container.appendChild(createReply());
+                      
     }
+    else
+    {
+
+        let replies=createReply();
+        for (let index = 0; index < data.replies.length; index++) 
+        {   
+            
+            createElements(data.replies[index],replies)
+            ParentContainer.appendChild(replies); 
+        }
     
 
     }
-    
-    
-    
-    // Append it to the container
-  
+      
     
 }
+
+// 4. Generate comments from the JSON File
+const addContentDynamically=(data)=>
+{
+    let ParentContainer=container;
+    currentUser=data.currentUser.username
+
+    for (let index = 0; index < data.comments.length; index++) 
+    {
+         createElements(data.comments[index],ParentContainer);
+    }
+    addComment();
+
+    // For delete button 
+    const del=document.querySelectorAll(".deletBtn");
+    del.forEach(deleteBtn => {
+        deleteBtn.addEventListener("click",(e)=>{
+            let cont=(((deleteBtn.parentElement).parentNode).parentNode).parentNode
+            window.scrollTo({ top: 0 });
+            
+            modal.style.visibility="visible";
+            functiondisable()
+                let modalDeleteBtn =document.querySelector(".delete-comment-btn")
+                let modalCancelBtn =document.querySelector(".cancel-delete-comment-btn")
+                modalCancelBtn.addEventListener("click",(e)=>{e.preventDefault; modal.style.visibility="hidden";functionenable()})
+                modalDeleteBtn.addEventListener("click",(e)=>{e.preventDefault; modal.style.visibility="hidden" ; cont.style.display="none";functionenable()})
+            
+        })
+      
+    });
+    // End of delete button
+
+    // Reply button 
+    const replyBtn=document.querySelectorAll(".reply");
+    replyBtn.forEach(reply=>{
+        reply.addEventListener("click",(e)=>{ 
+        console.log("replied")})
+    })
+
+    
+
+}
+
 
 
 
@@ -164,17 +220,12 @@ const createReply=()=>
     async function fetchAsync () {
     // await response of fetch call
     let response = await fetch("../data.json");
-    // only proceed once promise is resolved
     let data = await response.json();
-    // only proceed once second promise is resolved
     return data;
   }
   
-  // trigger async function
+  // trigger async function To add Comments from JSON file to the page
   fetchAsync()
-      .then(data => addComment(data,container) )
+      .then(data => addContentDynamically(data,container) );
       
-
-
-
 

@@ -157,6 +157,10 @@ a {
   color: var(--Soft_Red);
   cursor: pointer;
 }
+.deletBtn {
+  color: var(--Soft_Red);
+  margin-right: 4px;
+}
 .mobile {
   display: none;
 }
@@ -193,11 +197,89 @@ a {
   border-radius: 10px;
   border: 1px solid var(--Light_grayish_blue);
 }
+.usernamereply {
+  color: var(--Moderate_blue);
+  cursor: pointer;
+  font-weight: bolder;
+}
+
+/* Modal  */
+
+.modal {
+  visibility: hidden;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  z-index: 100;
+  background-color: rgba(73, 73, 73, 0.212);
+}
+.modal-content {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  color: hsl(212, 24%, 26%);
+  font-size: larger;
+  line-height: 1.5rem;
+  height: max-content;
+  width: 25%;
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.modal-btns {
+  display: flex;
+  justify-content: space-evenly;
+}
+.btn {
+  cursor: pointer;
+  border: none;
+  border-radius: 10px;
+  padding: 20px;
+  color: white;
+}
+
+.cancel-delete-comment-btn {
+  background-color: rgb(160, 160, 160);
+}
+.delete-comment-btn {
+  background-color: var(--Soft_Red);
+}
+
+.cancel-delete-comment-btn:hover {
+  background-color: rgb(97, 96, 96);
+}
+.delete-comment-btn:hover {
+  background: hsl(358, 68%, 39%);
+}
+
 /* Media Queries for smaller screens */
 @media screen and (max-width: 1284px) {
   .container {
     width: 70%;
     margin: auto 15%;
+  }
+  .modal {
+    font-size: 0.7rem;
+  }
+  .modal-content {
+    width: 80%;
+    margin: 0 2%;
+  }
+  .modal-btns {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .btn {
+    margin: 3px;
+    width: 50%;
+    font-size: 0.7rem;
   }
 }
 
