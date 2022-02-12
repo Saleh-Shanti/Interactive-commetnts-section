@@ -25,7 +25,7 @@ Users should be able to:
 
 ### Screenshot
 
-![Home page](../screenshot.PNG?raw=true)
+![Home page](./screenshot.PNG)
 
 ### Links
 
