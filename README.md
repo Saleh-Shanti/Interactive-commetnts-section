@@ -25,7 +25,7 @@ Users should be able to:
 
 ### Screenshot
 
-![Home page](/screenshot.png?raw=true "Optional Title")
+![Home page](../screenshot.PNG?raw=true)
 
 ### Links
 
